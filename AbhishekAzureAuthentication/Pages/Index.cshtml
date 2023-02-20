@@ -1,0 +1,51 @@
+﻿@page
+@using System.Security.Claims
+@using AzureAuthentication.Pages;
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Displaying the Invntory List</h1>
+    @{
+        if (Model.inventoryList.Count > 0)
+        {
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>
+                            Inventory ID
+                        </td>
+                        <td>
+                            Inventory Name
+                        </td>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                        Price
+                        </td>
+                    </tr>
+                </thead>
+                @foreach (var item in @Model.inventoryList)
+                {
+                    <tr>
+                        <td>@item.InventoryID </td>
+                        <td>@item.InventoryName  </td>
+                        <td>@item.Description </td>
+                        <td>@item.Price </td>
+                        <td>@Html.ActionLink("Edit ", "Edit", new { InventoryID = @item.InventoryID,InventoryName = @item.InventoryName , Description = @item.Description, Price = item.Price })</td>
+                        <td>@Html.ActionLink("| Delete", "Delete", new { InventoryID = @item.InventoryID })</td>
+                    </tr>
+                }
+            </table>
+            <br />
+        }
+        else
+        {
+            <span> No records found!!</span>
+        }
+    }
+</div>
+
